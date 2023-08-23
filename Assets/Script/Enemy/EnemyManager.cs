@@ -9,22 +9,22 @@ public class EnemyManager : MonoBehaviour, IPoolable<IMemoryPool>
 {
     [SerializeField] private Slider healthValue;
     public event Action<EnemyManager> OnEnemyDeath;
-    IMemoryPool _pool;
+
+    private IMemoryPool _pool;
+    private IMoveToward _moveToward;
 
     [SerializeField] private int maxHealth;
     [SerializeField] private int armor;
     [SerializeField] private float speed;
+    [SerializeField] private int attackDamage;
 
     [SerializeField] private int currentHealth;
-    private IMoveToward _moveToward;
 
-    private HealthUIController _healthController;
 
     [Inject]
-    private void Construct(IMoveToward moveToward, HealthUIController healthController)
+    private void Construct(IMoveToward moveToward)
     {
         _moveToward = moveToward;
-        _healthController = healthController;
     }
 
     public void Initialize(Vector3 position, Quaternion rotation)
@@ -55,10 +55,11 @@ public class EnemyManager : MonoBehaviour, IPoolable<IMemoryPool>
 
         if (collision.CompareTag("Player"))
         {
-            _healthController.TakeDamage(25);
+            Player playerHealth = collision.gameObject.GetComponent<Player>();
+            playerHealth.TakeDamage(attackDamage);
+
             ReturnToPool();
         }
-
 
         if (collision.CompareTag("Bullet"))
         {

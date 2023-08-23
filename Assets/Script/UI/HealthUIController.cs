@@ -7,18 +7,26 @@ using UnityEngine.SceneManagement;
 public class HealthUIController : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
-    private int currentHealth = 100;
+    [SerializeField] private int tankArmour;
+    [SerializeField] private int currentHealth;
+    private int maxHealth = 100;
 
-  
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
     private void Update()
     {
         UpdateHealthUI();
     }
 
-
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
+        int effectiveDamage = Mathf.Max(0, damageAmount - Mathf.Max(0, tankArmour));
+
+        currentHealth -= effectiveDamage;
+        currentHealth = Mathf.Max(0, currentHealth);
 
         if (currentHealth <= 0)
         {

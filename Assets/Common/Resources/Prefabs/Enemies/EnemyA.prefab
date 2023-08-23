@@ -682,8 +682,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: {fileID: 2497534984844465408}
   maxHealth: 100
-  armor: 50
+  armor: 25
   speed: 3
+  attackDamage: 25
   currentHealth: 0
 --- !u!54 &8292916693201646883
 Rigidbody:

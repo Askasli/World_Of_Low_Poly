@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public interface IHealth
+public interface IDamageable
 {
     void TakeDamage(int damage);
 }
