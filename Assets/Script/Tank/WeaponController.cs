@@ -25,6 +25,7 @@ public class WeaponController : IWeaponController
     {
         _bulletFactory = bulletFactory;
         _targetPosition = targetPosition;
+
         _machineGunBulletFactory = machineGunbBlletFactory;
         _explosionMachGunFactory = explosionMachGunFactory;
 
@@ -67,8 +68,13 @@ public class WeaponController : IWeaponController
     private void ShootBullet(Transform shootPosition, float force, float coolDown)
     {
         var bullet = _bulletFactory.Create();
+
+        var explosion = _explosionMachGunFactory.Create();
+        explosion.transform.position = shootPosition.position;
+
         bullet.transform.position = shootPosition.position;
         bullet.transform.rotation = shootPosition.rotation;
+
         shootCooldown = coolDown;
         ApplyBulletForce(bullet.GetComponent<Rigidbody>(), shootPosition, force);
 
@@ -82,6 +88,7 @@ public class WeaponController : IWeaponController
 
         bullet.transform.position = shootPosition.position;
         bullet.transform.rotation = shootPosition.rotation;
+
         shootCooldown = coolDown;
         ApplyBulletForce(bullet.GetComponent<Rigidbody>(), shootPosition, force);
     }
