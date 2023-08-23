@@ -16,9 +16,6 @@ public class MoveToward : IMoveToward
 
     public void MoveToThePlayer(Transform currentTransform, float speed)
     {
-
-        Debug.Log("Работает MoveToThePlayer");
-
         
         Vector3 playerDirection = (_player.transform.position - currentTransform.position).normalized;
         Vector3 moveDirection = playerDirection;

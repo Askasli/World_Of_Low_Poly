@@ -32,7 +32,7 @@ public class EnemyControlSpawn : IEnemyControlSpawn
             _spawnedEnemyCount++;
         }
 
-        Debug.Log(_spawnedEnemyCount + " _spawnedEnemyCount");
+
     }
 
     void SpawnRandomEnemy()
