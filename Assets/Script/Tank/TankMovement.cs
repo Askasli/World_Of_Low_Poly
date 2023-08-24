@@ -22,8 +22,6 @@ public class TankMovement : ITankMovement
         Vector3 movement = transform.forward * verticalInput * _moveSpeed;
         rigi.AddForce(movement, ForceMode.VelocityChange);
         rigi.velocity = Vector3.ClampMagnitude(rigi.velocity, _maxSpeed);
-
-        Debug.Log("работает");
     }
 
     public void Rotate(float rotationInput, Rigidbody rigi)
