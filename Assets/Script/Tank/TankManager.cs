@@ -57,6 +57,4 @@ public class TankManager: MonoBehaviour
     {
         _weaponController.Shoot(spawnPointShoot, spawnPointShootMachineGun);
     }
-
-    
 }

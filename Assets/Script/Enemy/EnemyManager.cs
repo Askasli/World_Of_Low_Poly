@@ -8,6 +8,7 @@ using Zenject;
 public class EnemyManager : MonoBehaviour, IPoolable<IMemoryPool>
 {
     [SerializeField] private Slider healthValue;
+
     public event Action<EnemyManager> OnEnemyDeath;
 
     private IMemoryPool _pool;
@@ -17,7 +18,6 @@ public class EnemyManager : MonoBehaviour, IPoolable<IMemoryPool>
     [SerializeField] private int armor;
     [SerializeField] private float speed;
     [SerializeField] private int attackDamage;
-
     [SerializeField] private int currentHealth;
 
 
