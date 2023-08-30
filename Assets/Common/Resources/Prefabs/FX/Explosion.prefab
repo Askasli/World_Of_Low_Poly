@@ -4915,7 +4915,7 @@ MonoBehaviour:
   particleSystem:
   - {fileID: 5406902600508763924}
   - {fileID: 717325662020992815}
-  timeBetweenParticles: 0.2
+  timeBetweenParticles: 0.1
   lifeTime: 1
 --- !u!1 &9069315389307025811
 GameObject:

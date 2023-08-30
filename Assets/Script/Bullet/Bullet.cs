@@ -14,10 +14,11 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     private IMemoryPool _pool;
 
 
-    private float _startTime;
-    private float _lifeTime = 2.5f;
-
     [SerializeField] private int _damageAmount = 10;
+    private float startTime;
+    private float lifeTime = 2.5f;
+
+  
 
 
     private Explosion.Factory _explosionFactory;
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 
     public void Update()
     {
-        if (Time.realtimeSinceStartup - _startTime > _lifeTime)
+        if (Time.realtimeSinceStartup - startTime > lifeTime)
         {
             _pool.Despawn(this);
         }
@@ -41,7 +42,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     public void OnSpawned(IMemoryPool pool)
     {
         _trailRenderer.enabled = false;
-        _startTime = Time.realtimeSinceStartup;
+         startTime = Time.realtimeSinceStartup;
         _pool = pool;
     }
 
@@ -61,7 +62,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         {
           
             _trailRenderer.enabled = false;
-            _explosionForce.Explode(transform.position, explosionRadius, explosionForce);
+        //    _explosionForce.Explode(transform.position, explosionRadius, explosionForce);
 
             var explosion = _explosionFactory.Create();
             explosion.transform.position = transform.position;
