@@ -30,7 +30,7 @@ public class MachineGunBullet : MonoBehaviour, IPoolable<IMemoryPool>
     public void OnSpawned(IMemoryPool pool)
     {
         _startTime = Time.realtimeSinceStartup;
-        _trailRenderer.gameObject.SetActive(true);
+        _trailRenderer.enabled = false; //fix it later
         _pool = pool;
     }
 
@@ -48,8 +48,9 @@ public class MachineGunBullet : MonoBehaviour, IPoolable<IMemoryPool>
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
         {
+
             _trailRenderer.enabled = false;
-            _trailRenderer.gameObject.SetActive(false);
+         
 
             Debug.Log("were hit");
 

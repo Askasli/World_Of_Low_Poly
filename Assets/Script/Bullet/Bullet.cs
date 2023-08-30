@@ -6,8 +6,14 @@ using Zenject;
 
 public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 {
-    [SerializeField]private TrailRenderer _trailRenderer;
+    [SerializeField] private float explosionRadius = 15f;
+    [SerializeField] private float explosionForce = 100f;
+    [SerializeField] private TrailRenderer _trailRenderer;
+
+    private IExplosionForce _explosionForce;
     private IMemoryPool _pool;
+
+
     private float _startTime;
     private float _lifeTime = 2.5f;
 
@@ -17,9 +23,10 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     private Explosion.Factory _explosionFactory;
 
     [Inject]
-    public void Construct(Explosion.Factory explosionFactory)
+    public void Construct(Explosion.Factory explosionFactory, IExplosionForce explosionForce)
     {
         _explosionFactory = explosionFactory;
+        _explosionForce = explosionForce;
     }
 
 
@@ -56,6 +63,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
             _trailRenderer.enabled = false;
             _trailRenderer.gameObject.SetActive(false);
 
+            _explosionForce.Explode(transform.position, explosionRadius, explosionForce);
 
             var explosion = _explosionFactory.Create();
             explosion.transform.position = transform.position;

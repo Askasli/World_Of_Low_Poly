@@ -5,21 +5,16 @@ using Zenject;
 
 public class MachineGunExplosion : MonoBehaviour, IPoolable<IMemoryPool>
 {
-    [SerializeField] ParticleSystem[] _particleSystem;
-    [SerializeField] float _lifeTime;
-    float _startTime;
+    [SerializeField] private ParticleSystem[] particleSystem;
+    [SerializeField] private float timeBetweenParticles = 0.1f;
+    [SerializeField] float lifeTime;
+    float startTime;
 
     IMemoryPool _pool;
 
-    public void Activate(bool isSpecial)
-    {
-      
-    }
-
-
     public void Update()
     {
-        if (Time.realtimeSinceStartup - _startTime > _lifeTime)
+        if (Time.realtimeSinceStartup - startTime > lifeTime)
         {
             _pool.Despawn(this);
         }
@@ -31,14 +26,21 @@ public class MachineGunExplosion : MonoBehaviour, IPoolable<IMemoryPool>
 
     public void OnSpawned(IMemoryPool pool)
     {
-        for (int i = 0; i < _particleSystem.Length; i++)
+        for (int i = 0; i < particleSystem.Length; i++)
         {
-            _particleSystem[i].Clear();
-            _particleSystem[i].Play();
+            StartCoroutine(PlayParticleSystem(i));
+            lifeTime += timeBetweenParticles;
         }
 
-        _startTime = Time.realtimeSinceStartup;
+        startTime = Time.realtimeSinceStartup;
         _pool = pool;
+    }
+
+    private IEnumerator PlayParticleSystem(int index)
+    {
+        yield return new WaitForSeconds(timeBetweenParticles * index);
+        particleSystem[index].Clear();
+        particleSystem[index].Play();
     }
 
     public class Factory : PlaceholderFactory<MachineGunExplosion>

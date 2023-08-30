@@ -27,6 +27,7 @@ public class TankInstaller : MonoInstaller
         Container.Bind<IWeaponController>().To<WeaponController>().AsSingle();
         Container.Bind<ITargetPosition>().To<TargetPosition>().AsSingle().WithArguments(crosshair);
         Container.Bind<Rigidbody>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<IExplosionForce>().To<ExplosionForce>().AsSingle();
     }
 
 

@@ -4912,10 +4912,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb38ba0cde041a54ea6958fea2bd1dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem:
+  particleSystem:
   - {fileID: 5406902600508763924}
   - {fileID: 717325662020992815}
-  _lifeTime: 1
+  timeBetweenParticles: 0.2
+  lifeTime: 1
 --- !u!1 &9069315389307025811
 GameObject:
   m_ObjectHideFlags: 0
