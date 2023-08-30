@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     private IMemoryPool _pool;
     private float _startTime;
     private float _lifeTime = 2.5f;
+
     [SerializeField] private int _damageAmount = 10;
 
 
@@ -19,12 +20,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     public void Construct(Explosion.Factory explosionFactory)
     {
         _explosionFactory = explosionFactory;
-    }
-
-    public void Initialize(Vector3 position, Quaternion rotation)
-    {
-        transform.position = position;
-        transform.rotation = rotation;
     }
 
 

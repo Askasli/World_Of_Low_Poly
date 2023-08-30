@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -63,12 +64,14 @@ public class EnemyManager : MonoBehaviour, IPoolable<IMemoryPool>
 
         if (collision.CompareTag("Bullet"))
         {
-            TakeDamage(50, armor);
+            Bullet bullet = collision.GetComponent<Bullet>();
+            TakeDamage(bullet.GetDamage(), armor);
         }
 
         if (collision.CompareTag("mBullet"))
         {
-            TakeDamage(20, armor);
+            MachineGunBullet bullet = collision.GetComponent<MachineGunBullet>();
+            TakeDamage(bullet.GetDamage(), armor);
         }
     }
 

@@ -247,8 +247,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7527044668915721778}
   - component: {fileID: 5184579119683545665}
-  - component: {fileID: 7683366497280865771}
   - component: {fileID: 261292893145696877}
+  - component: {fileID: 450614491479267075}
   m_Layer: 0
   m_Name: MachineGunBullet
   m_TagString: mBullet
@@ -300,8 +300,22 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &7683366497280865771
-SphereCollider:
+--- !u!114 &261292893145696877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710011935802477090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7402adf9bade546bab19df8646bc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trailRenderer: {fileID: 5277835284226799749}
+  _damageAmount: 10
+--- !u!136 &450614491479267075
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -318,19 +332,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.17
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &261292893145696877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710011935802477090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7402adf9bade546bab19df8646bc19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _trailRenderer: {fileID: 5277835284226799749}
+  serializedVersion: 2
+  m_Radius: 0.02
+  m_Height: 0.27035284
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.061496492}

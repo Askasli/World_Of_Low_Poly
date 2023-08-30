@@ -9,7 +9,7 @@ public class MachineGunBullet : MonoBehaviour, IPoolable<IMemoryPool>
     private IMemoryPool _pool;
     private float _startTime;
     private float _lifeTime = 1.5f;
-    private int _damageAmount;
+    [SerializeField] private int _damageAmount = 10;
 
     private MachineGunExplosion.Factory _explosionMachGunFactory;
 
@@ -19,11 +19,6 @@ public class MachineGunBullet : MonoBehaviour, IPoolable<IMemoryPool>
         _explosionMachGunFactory = explosionMachGunFactory;
     }
 
-    public void Initialize(Vector3 position, Quaternion rotation)
-    {
-        transform.position = position;
-        transform.rotation = rotation;
-    }
     public void Update()
     {
         if (Time.realtimeSinceStartup - _startTime > _lifeTime)

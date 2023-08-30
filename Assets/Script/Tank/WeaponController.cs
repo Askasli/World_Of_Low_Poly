@@ -47,11 +47,11 @@ public class WeaponController : IWeaponController
         {
             if (isGunActive)
             {
-                ShootBullet(shootPosition, 100f, 0.6f);
+                ShootBullet(shootPosition, 60f, 0.6f);
             }
             else
             {
-                ShootMachineBullet(subMachineGunPosition, 100, 0.2f);
+                ShootMachineBullet(subMachineGunPosition, 80f, 0.2f);
             }
 
             shootTimer = 0.0f;
