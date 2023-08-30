@@ -40,8 +40,8 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
 
     public void OnSpawned(IMemoryPool pool)
     {
+        _trailRenderer.enabled = false;
         _startTime = Time.realtimeSinceStartup;
-        _trailRenderer.gameObject.SetActive(true);
         _pool = pool;
     }
 
@@ -61,8 +61,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         {
           
             _trailRenderer.enabled = false;
-            _trailRenderer.gameObject.SetActive(false);
-
             _explosionForce.Explode(transform.position, explosionRadius, explosionForce);
 
             var explosion = _explosionFactory.Create();
