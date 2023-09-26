@@ -62,7 +62,6 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
         {
           
             _trailRenderer.enabled = false;
-        //    _explosionForce.Explode(transform.position, explosionRadius, explosionForce);
 
             var explosion = _explosionFactory.Create();
             explosion.transform.position = transform.position;

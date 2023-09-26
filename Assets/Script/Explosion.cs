@@ -8,6 +8,9 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
     [SerializeField] private ParticleSystem[] particleSystem;
     [SerializeField] private float timeBetweenParticles = 0.1f;
 
+    [SerializeField] float explosionRadius = 15f;
+    [SerializeField] float explosionForce = 100f;
+
     float startTime;
     [SerializeField]
     float lifeTime;
@@ -36,8 +39,24 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
             lifeTime += timeBetweenParticles;
         }
 
+      
+
         startTime = Time.realtimeSinceStartup;
         _pool = pool;
+    }
+
+    private void ApplyExplosion()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            }
+        }
     }
 
     private IEnumerator PlayParticleSystem(int index)
@@ -45,6 +64,7 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
         yield return new WaitForSeconds(timeBetweenParticles * index);
         particleSystem[index].Clear();
         particleSystem[index].Play();
+        ApplyExplosion();
     }
 
     public class Factory : PlaceholderFactory<Explosion>
