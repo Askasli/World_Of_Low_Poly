@@ -17,14 +17,6 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
 
     IMemoryPool _pool;
 
-    public void Update()
-    {
-        if (Time.realtimeSinceStartup - startTime > lifeTime)
-        {
-            _pool.Despawn(this);
-        }
-    }
-
     public void OnDespawned()
     {
     }
@@ -38,12 +30,18 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
             StartCoroutine(PlayParticleSystem(i));
             lifeTime += timeBetweenParticles;
         }
-
       
-
-        startTime = Time.realtimeSinceStartup;
         _pool = pool;
+        StartCoroutine(CoolDownDespawn());
     }
+
+
+    IEnumerator CoolDownDespawn()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        _pool.Despawn(this);
+    }
+
 
     private void ApplyExplosion()
     {
@@ -58,6 +56,9 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
             }
         }
     }
+
+
+
 
     private IEnumerator PlayParticleSystem(int index)
     {

@@ -13,9 +13,7 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     private IExplosionForce _explosionForce;
     private IMemoryPool _pool;
 
-
     [SerializeField] private int _damageAmount = 10;
-    private float startTime;
     private float lifeTime = 2.5f;
 
   
@@ -31,19 +29,11 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
     }
 
 
-    public void Update()
-    {
-        if (Time.realtimeSinceStartup - startTime > lifeTime)
-        {
-            _pool.Despawn(this);
-        }
-    }
-
     public void OnSpawned(IMemoryPool pool)
     {
         _trailRenderer.enabled = false;
-         startTime = Time.realtimeSinceStartup;
         _pool = pool;
+        StartCoroutine(CoolDownDespawn());
     }
 
     public void OnDespawned()
@@ -69,6 +59,12 @@ public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>
             ReturnToPool();
         }
     
+    }
+
+    IEnumerator CoolDownDespawn()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        _pool.Despawn(this);
     }
 
     public int GetDamage()

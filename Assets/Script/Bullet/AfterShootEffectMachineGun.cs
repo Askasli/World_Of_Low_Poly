@@ -11,13 +11,6 @@ public class AfterShootEffectMachineGun : MonoBehaviour, IPoolable<IMemoryPool>
 
     IMemoryPool _pool;
 
-    public void Update()
-    {
-        if (Time.realtimeSinceStartup - _startTime > _lifeTime)
-        {
-            _pool.Despawn(this);
-        }
-    }
 
     public void OnDespawned()
     {
@@ -33,6 +26,15 @@ public class AfterShootEffectMachineGun : MonoBehaviour, IPoolable<IMemoryPool>
 
         _startTime = Time.realtimeSinceStartup;
         _pool = pool;
+
+        StartCoroutine(CoolDownDespawn());
+
+    }
+
+    IEnumerator CoolDownDespawn()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        _pool.Despawn(this);
     }
 
     public class Factory : PlaceholderFactory<AfterShootEffectMachineGun>

@@ -8,18 +8,11 @@ public class MachineGunExplosion : MonoBehaviour, IPoolable<IMemoryPool>
     [SerializeField] private ParticleSystem[] particleSystem;
     [SerializeField] private float timeBetweenParticles = 0.1f;
     [SerializeField] float lifeTime;
-    float startTime;
+  
 
     IMemoryPool _pool;
 
-    public void Update()
-    {
-        if (Time.realtimeSinceStartup - startTime > lifeTime)
-        {
-            _pool.Despawn(this);
-        }
-    }
-
+ 
     public void OnDespawned()
     {
     }
@@ -32,11 +25,20 @@ public class MachineGunExplosion : MonoBehaviour, IPoolable<IMemoryPool>
             lifeTime += timeBetweenParticles;
         }
 
-        startTime = Time.realtimeSinceStartup;
         _pool = pool;
+
+        StartCoroutine(CoolDownDespawn());
     }
 
-    private IEnumerator PlayParticleSystem(int index)
+
+    IEnumerator CoolDownDespawn()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        _pool.Despawn(this);
+    }
+
+
+    IEnumerator PlayParticleSystem(int index)
     {
         yield return new WaitForSeconds(timeBetweenParticles * index);
         particleSystem[index].Clear();

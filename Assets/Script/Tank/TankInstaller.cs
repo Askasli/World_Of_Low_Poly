@@ -28,6 +28,10 @@ public class TankInstaller : MonoInstaller
         Container.Bind<ITargetPosition>().To<TargetPosition>().AsSingle().WithArguments(crosshair);
         Container.Bind<Rigidbody>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IExplosionForce>().To<ExplosionForce>().AsSingle();
+
+        Container.Bind<ItestTwo>().To<TestTwo>().AsSingle();
+
+
     }
 
 
