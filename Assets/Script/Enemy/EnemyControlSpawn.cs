@@ -49,7 +49,6 @@ public class EnemyControlSpawn : IEnemyControlSpawn
         {
             var enemyManager = chosenFactory.Create();
             enemyManager.OnEnemyDeath += HandleEnemyDeath;
-
             enemyManager.transform.position = ChooseRandomStartPosition(_existingEnemies);
 
             _existingEnemies.Add(enemyManager);

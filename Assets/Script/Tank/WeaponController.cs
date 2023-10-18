@@ -10,7 +10,7 @@ public class WeaponController : IWeaponController
     private InputHandler inputHandler;
     private ICameraShake _cameraShake;
     private ITargetPosition _targetPosition;
-    private ÑameraShake shakeSettings;
+ //   private ï¿½ameraShake shakeSettings;
 
 
     private bool canShoot = true;
@@ -29,7 +29,7 @@ public class WeaponController : IWeaponController
         _machineGunBulletFactory = machineGunbBlletFactory;
         _explosionMachGunFactory = explosionMachGunFactory;
 
-        shakeSettings = new ÑameraShake();
+     //   shakeSettings = new ï¿½ameraShake();
         inputHandler = new InputHandler();
 
         inputHandler.OnQPressed += HandleQPressed;
@@ -108,7 +108,7 @@ public class WeaponController : IWeaponController
 
     IEnumerator Shake()
     {
-        shakeSettings.ShakeMagnitude = Mathf.Lerp(0.1f, 0.2f, Mathf.PingPong(Time.time, 1f));
+      //  shakeSettings.ShakeMagnitude = Mathf.Lerp(0.1f, 0.2f, Mathf.PingPong(Time.time, 1f));
         yield return null;
     }
 

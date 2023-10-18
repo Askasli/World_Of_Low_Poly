@@ -5,7 +5,7 @@ using Zenject;
 public class CameraRotation : ICameraRotation
 {
     private Transform playerTransform;
-    private ÑameraShake _shakeSettings;
+   // private ï¿½ameraShake _shakeSettings;
 
     private Vector3 targetOffset;
     private Vector3 position;
@@ -24,7 +24,7 @@ public class CameraRotation : ICameraRotation
     private void Construct(Player player)
     {
         playerTransform = player.transform;
-        _shakeSettings = new ÑameraShake();
+     //   _shakeSettings = new ï¿½ameraShake();
     }
 
     public void RotateCamera(Vector3 camPose, float mouseX, float mouseY)

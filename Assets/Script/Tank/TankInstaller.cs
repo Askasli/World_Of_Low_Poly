@@ -29,7 +29,7 @@ public class TankInstaller : MonoInstaller
         Container.Bind<Rigidbody>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IExplosionForce>().To<ExplosionForce>().AsSingle();
 
-        Container.Bind<ItestTwo>().To<TestTwo>().AsSingle();
+      
 
 
     }

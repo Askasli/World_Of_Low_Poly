@@ -32,9 +32,9 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
         }
       
         _pool = pool;
+
         StartCoroutine(CoolDownDespawn());
     }
-
 
     IEnumerator CoolDownDespawn()
     {
@@ -56,9 +56,6 @@ public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
             }
         }
     }
-
-
-
 
     private IEnumerator PlayParticleSystem(int index)
     {
