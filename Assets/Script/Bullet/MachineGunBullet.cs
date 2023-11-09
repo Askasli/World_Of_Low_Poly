@@ -19,18 +19,19 @@ public class MachineGunBullet : MonoBehaviour, IPoolable<IMemoryPool>
         _explosionMachGunFactory = explosionMachGunFactory;
     }
 
-    public void Update()
+ 
+    IEnumerator CoolDownDespawn()
     {
-        if (Time.realtimeSinceStartup - _startTime > _lifeTime)
-        {
-            _pool.Despawn(this);
-        }
+        yield return new WaitForSeconds(_lifeTime);
+        _pool.Despawn(this);
     }
+
 
     public void OnSpawned(IMemoryPool pool)
     {
         _startTime = Time.realtimeSinceStartup;
         _trailRenderer.enabled = false; //fix it later
+        StartCoroutine(CoolDownDespawn());
         _pool = pool;
     }
 
