@@ -5,6 +5,7 @@ using Zenject;
 public class CameraRotation : ICameraRotation
 {
     private Transform playerTransform;
+    private IMouseInput _mouseInput;
    // private �ameraShake _shakeSettings;
 
     private Vector3 targetOffset;
@@ -21,16 +22,16 @@ public class CameraRotation : ICameraRotation
 
 
     [Inject]
-    private void Construct(Player player)
+    private void Construct(Player player, IMouseInput mouseInput)
     {
         playerTransform = player.transform;
-     //   _shakeSettings = new �ameraShake();
+        _mouseInput = mouseInput;
     }
 
-    public void RotateCamera(Vector3 camPose, float mouseX, float mouseY)
+    public void RotateCamera(Vector3 camPose)
     {
-        xRot += mouseY * Speed;
-        yRot += mouseX * Speed;
+        xRot += _mouseInput.GetMouseY() * Speed;
+        yRot += _mouseInput.GetMouseX()  * Speed;
 
         xRot = ClampAngle(xRot, -60f, 20);
 
@@ -46,12 +47,6 @@ public class CameraRotation : ICameraRotation
 
         Camera.main.transform.rotation = currentRotation;
         Camera.main.transform.position = position;
-
-        /*
-        Vector3 rotationAmount = Random.insideUnitSphere * _shakeSettings.ShakeMagnitude;
-        rotationAmount.z = 0f;
-        Camera.main.transform.rotation = currentRotation * Quaternion.Euler(rotationAmount);
-        */
     }
 
 

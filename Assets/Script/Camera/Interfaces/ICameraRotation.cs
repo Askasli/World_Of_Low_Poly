@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICameraRotation
 {
-    void RotateCamera(Vector3 position, float mouseX, float mouseY);
+    void RotateCamera(Vector3 position);
 }

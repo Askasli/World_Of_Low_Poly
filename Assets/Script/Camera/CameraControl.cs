@@ -6,16 +6,14 @@ using Zenject;
 public class CameraControl : MonoBehaviour
 {
     private ICameraRotation cameraRotation;
-    private IMouseInput mouseInput;
 
     private Vector3 rotationAmount;
     [SerializeField] private Vector3 targetOffset;
 
     [Inject]
-    private void Construct(ICameraRotation cameraRotation, IMouseInput mouseInput)
+    private void Construct(ICameraRotation cameraRotation)
     {
         this.cameraRotation = cameraRotation;
-        this.mouseInput = mouseInput;
     }
 
     private void Awake()
@@ -31,8 +29,6 @@ public class CameraControl : MonoBehaviour
 
     public void RotateCamera()
     {
-        cameraRotation.RotateCamera(targetOffset, mouseInput.GetMouseX(), mouseInput.GetMouseY());
+        cameraRotation.RotateCamera(targetOffset);
     }
-
-
 }
